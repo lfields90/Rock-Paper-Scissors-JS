@@ -20,8 +20,25 @@ function convertToWord(letter) {
   return "Scissors";
 }
 
-function resultStatement(userChoice, compChoice) {
+function resetGame() {
+  userScore = 0;
+  compScore = 0;
+  userScore_span.innerHTML = userScore;
+  compScore_span.innerHTML = compScore;
+}
 
+function winCondition (userScore, compScore) {
+  if (userScore == 10) {
+    result_div.innerHTML = "You did it! You beat the computer to 10!!!"
+    userScore_span.classList.add('user-score-green-glow');
+    setTimeout(() => userScore_span.classList.remove('user-score-green-glow'), 2000);
+    resetGame();
+  } else if (compScore == 10) {
+    result_div.innerHTML = "Yikes! You lost and I don't even have hands!"
+    userScore_span.classList.add('user-score-red-glow');
+    setTimeout(() => userScore_span.classList.remove('user-score-red-glow'), 2000);
+    resetGame();
+  }
 }
 
 function userWin(userChoice, compChoice) {
@@ -31,6 +48,7 @@ function userWin(userChoice, compChoice) {
   result_div.innerHTML = `${convertToWord(userChoice)} beats ${convertToWord(compChoice)}. You win!`;
   userChoice_div.classList.add('green-glow');
   setTimeout(() => userChoice_div.classList.remove('green-glow'), 400);
+  winCondition(userScore, 0);
 }
 
 function userLose(userChoice, compChoice) {
@@ -40,6 +58,7 @@ function userLose(userChoice, compChoice) {
   result_div.innerHTML = `${convertToWord(userChoice)} doesn't beat ${convertToWord(compChoice)}. You lose.`;
   userChoice_div.classList.add('red-glow');
   setTimeout(() => userChoice_div.classList.remove('red-glow'), 400);
+  winCondition(0, compScore);
 }
 
 function userDraw(userChoice, compChoice) {
