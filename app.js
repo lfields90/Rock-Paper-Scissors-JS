@@ -21,6 +21,7 @@ function convertToWord(letter) {
 }
 
 function resetGame() {
+  setTimeout(() => document.getElementById('intro-msg').innerHTML = "Let's go again. First to 10, wins!", 2000);
   userScore = 0;
   compScore = 0;
   userScore_span.innerHTML = userScore;
@@ -29,7 +30,7 @@ function resetGame() {
 
 function winCondition (userScore, compScore) {
   if (userScore == 10) {
-    result_div.innerHTML = "You did it! You beat the computer to 10!!!"
+    result_div.innerHTML = "You got lucky this time! It won't happen again!!!"
     userScore_span.classList.add('user-score-green-glow');
     setTimeout(() => userScore_span.classList.remove('user-score-green-glow'), 2000);
     resetGame();
